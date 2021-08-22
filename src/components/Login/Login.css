@@ -1,0 +1,175 @@
+.login {
+  max-width: 396px;
+  margin: 0 auto;
+  padding: 74px 70px;
+}
+
+.login__logo {
+  background-image: url('../../images/logo.svg');
+  background-size: 38px 38px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: none;
+
+  width: 38px;
+  height: 38px;
+
+  outline: none;
+  border: none;
+
+  display: inline-block;
+  border-radius: 5px;
+  transition: 0.2s ease-in;
+}
+
+.login__logo:hover {
+  transform: scale(110%);
+}
+
+.login__greetings {
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 29px;
+
+  margin: 0;
+  padding: 0;
+  padding-top: 40px;
+}
+
+.loginForm {
+  margin: 0;
+  padding: 0;
+
+  width: 100%;
+}
+
+.loginForm__inputs {
+  padding: 40px 0 134px;
+}
+
+.loginForm__inputArea {
+  margin: 0;
+  padding: 0;
+  padding-top: 24px;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.loginForm__inputArea:first-child {
+  padding-top: 0;
+}
+
+.loginForm__inputTitle {
+  margin: 0;
+  padding: 0;
+
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 12px;
+  color: #A0A0A0;
+}
+
+.loginForm__input {
+  margin: 0;
+  padding: 10px 0;
+
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+
+  border: none;
+  outline: none;
+  border-bottom: 1px solid#E8E8E8;
+}
+
+.loginForm__input:focus {
+  border-bottom: 1px solid#3456F3;
+}
+
+.loginForm__submitButton {
+  background-color:#3456F3;
+  color: white;
+  width: 100%;
+  margin: 0;
+  padding: 14px 0;
+  border-radius: 3px;
+  outline: none;
+  border: none;
+}
+
+.loginForm__submitButton:hover, .loginForm__submitButton:focus {
+  background-color:hsl(229, 89%, 50%);
+  letter-spacing: 1px;
+}
+
+.loginForm__signupWrapper {
+  margin: 0;
+  margin-top: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loginForm__signupText {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  color: #A0A0A0;
+  margin: 0;
+  padding: 0;
+  padding-right: 6px;
+}
+
+.loginForm__signupButton {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  color: hsl(229, 89%, 58%);
+  background-color: transparent;
+  outline: none;
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+
+.loginForm__signupButton:hover, .loginForm__signupButton:focus {
+  font-weight: 500;
+  letter-spacing: 1px;
+  color: hsl(229, 89%, 50%);
+}
+
+@media screen and (max-width: 768px) {
+  .login {
+    padding-top: calc((100vh - 511px) / 2);
+  }
+}
+
+@media screen and (max-width: 420px) {
+  .login {
+    padding: 56px 30px 30px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .loginForm__inputs {
+    padding: 80px 0 280px;
+  }
+
+  .loginForm__submitButton {
+    font-size: 12px;
+    line-height: 15px;
+  }
+  
+  .loginForm__signupText {
+    font-size: 12px;
+    line-height: 15px;
+  }
+
+  .loginForm__signupButton {
+    font-size: 12px;
+    line-height: 15px;
+  }
+}

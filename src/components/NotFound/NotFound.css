@@ -1,0 +1,63 @@
+.notFound {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  height: 100%;
+  min-height: 100vh;
+}
+
+.notFound__number {
+  font-weight: 400;
+  font-size: 140px;
+  line-height: 169px;
+
+  margin: 0;
+  padding: 0;
+}
+
+.notFound__title {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+
+  margin: 0;
+  padding: 0;
+}
+
+.notFound__returnButton {
+  position: absolute;
+  bottom: 5%;
+
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  color: #3456F3;
+
+  border: none;
+  outline: none;
+  cursor: pointer;
+
+  background-color: transparent;
+  transition: 0.2s ease-in;
+}
+
+.notFound__returnButton:hover, .notFound__returnButton:focus{
+  letter-spacing: 1px;
+  font-weight: 500;
+}
+
+@media screen and (max-width: 767px) {
+  .notFound__returnButton {
+    bottom: 20%;
+  }
+}
+
+@media screen and (max-width: 319px) {
+  .notFound__returnButton {
+    bottom: 5%;
+  }
+}
