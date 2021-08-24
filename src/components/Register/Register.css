@@ -1,0 +1,195 @@
+.register {
+  max-width: 396px;
+  margin: 0 auto;
+  padding: 74px 70px;
+}
+
+.register__logo {
+  background-image: url('../../images/logo.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: transparent;
+
+  width: 38px;
+  height: 38px;
+
+  outline: none;
+  border: none;
+
+  margin: 0;
+  padding: 0;
+
+  display: inline-block;
+  transition: 0.2s ease-in;
+}
+
+.register__logo:hover {
+  transform: scale(110%);
+}
+
+.register__greetings {
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 29px;
+
+  margin: 0;
+  padding: 0;
+  padding-top: 40px;
+}
+
+.registerForm {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.registerForm__inputs {
+  padding: 40px 0 134px;
+}
+
+.registerForm__inputArea {
+  margin: 0;
+  padding: 0;
+  padding-top: 24px;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.registerForm__inputArea:first-child {
+  padding-top: 0;
+}
+
+.registerForm__inputTitle {
+  margin: 0;
+  padding: 0;
+
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 12px;
+  color: #A0A0A0;
+}
+
+.registerForm__input {
+  margin: 0;
+  padding: 10px 0;
+
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+
+  border: none;
+  outline: none;
+  border-bottom: 1px solid#E8E8E8;
+}
+
+.registerForm__input:focus {
+  border-bottom: 1px solid#3456F3;
+}
+
+.registerForm__inputError {
+  margin: 0;
+  padding: 0;
+  padding-top: 6px;
+
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 12px;
+  color: #FF3055;
+}
+
+.registerForm__inputError_hide {
+  display: none;
+}
+
+.registerForm__submitButton {
+  background-color:hsl(229, 89%, 58%);
+  border-radius: 3px;
+  outline: none;
+  border: none;
+
+  color: white;
+
+  width: 100%;
+  margin: 0;
+  padding: 14px 0;
+  
+  transition: 0.2s ease-in;
+}
+
+.registerForm__submitButton:hover, .registerForm__submitButton:focus {
+  background-color:hsl(229, 89%, 50%);
+  letter-spacing: 1px;
+}
+
+.registerForm__signinWrapper {
+  margin: 0;
+  margin-top: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.registerForm__signinText {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  color: #A0A0A0;
+  margin: 0;
+  padding: 0;
+  padding-right: 6px;
+}
+
+.registerForm__signinButton {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  color: hsl(229, 89%, 58%);
+  background-color: transparent;
+  outline: none;
+  border: none;
+  margin: 0;
+  padding: 0;
+  transition: 0.2s ease-in;
+}
+
+.registerForm__signinButton:hover, .registerForm__signinButton:focus {
+  font-weight: 500;
+  letter-spacing: 1px;
+  color: hsl(229, 89%, 50%);
+}
+
+@media screen and (max-width: 768px) {
+  .register {
+    padding-top: calc((100vh - 511px) / 2);
+  }
+}
+
+@media screen and (max-width: 420px) {
+  .register {
+    padding: 56px 30px 30px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .registerForm__inputs {
+    padding: 80px 0 180px;
+  }
+
+  .registerForm__submitButton {
+    font-size: 12px;
+    line-height: 15px;
+  }
+  
+  .registerForm__signinText {
+    font-size: 12px;
+    line-height: 15px;
+  }
+
+  .registerForm__signinButton {
+    font-size: 12px;
+    line-height: 15px;
+  }
+}

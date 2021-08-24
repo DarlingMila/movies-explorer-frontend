@@ -1,0 +1,51 @@
+.navTab {
+  background-color: #073042;
+}
+
+.navTab__content {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 45px 75px;
+
+  color: white;
+}
+
+.navTab__button {
+  color: white;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+
+  padding: 10px 20px;
+  
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 3px;
+  background-color: transparent;
+
+  text-decoration: none;
+  outline: none;
+  display: inline-block;
+
+  transition: 0.2s ease-in;
+}
+
+.navTab__button:hover, .navTab__button:focus  {
+  border: 1px solid rgba(255, 255, 255);
+  color: #2BE080;
+}
+
+@media screen and (max-width: 768px) {
+  .navTab__content {
+    padding: 22px 0 76px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+@media screen and (max-width: 420px) {
+  .navTab__content {
+    padding: 20px 0 40px;
+  }
+}

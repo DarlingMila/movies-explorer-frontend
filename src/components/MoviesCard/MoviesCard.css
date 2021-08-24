@@ -1,0 +1,97 @@
+.moviesCard {
+  max-width: 364px;
+  background-color: #FDFDFD;
+
+  box-shadow: 0px -4px 30px rgba(0, 0, 0, 0.1);
+
+  list-style-type: none;
+
+  margin: 0;
+  padding: 0;
+}
+
+.moviesCard__header {
+  margin: 0;
+  padding: 14px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.moviesCard__title {
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 18px;
+
+  margin: 0;
+  padding: 0;
+  padding-bottom: 9px;
+}
+
+.moviesCard__duration {
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 13px;
+
+  margin: 0;
+  padding: 0;
+
+  color: #A0A0A0;
+}
+
+.moviesCard__button {
+  background-color: #F9F9F9;
+  background-repeat: no-repeat;
+  background-position: center;
+
+  margin: 0;
+  padding: 0;
+
+  outline: none;
+  border: none;
+  border-radius: 50%;
+
+  width: 30px;
+  height: 30px;
+
+  transition: 0.2s ease-in;
+}
+
+.moviesCard__save {
+  background-image: url('../../images/grey-flag-icon.svg');
+  background-size: 10px 13px;
+}
+
+.moviesCard__save:hover, .moviesCard__save:focus  {
+  background-color: #2BE080;
+  background-image: url('../../images/white-flag-icon.svg');
+  opacity: 0.6;
+}
+
+.moviesCard__save_true {
+  background-color: #2BE080;
+  background-image: url('../../images/white-flag-icon.svg');
+  transition: 0.2s ease-in;
+}
+
+.moviesCard__save_true:hover, .moviesCard__save_true:focus {
+  background-color: #F9F9F9;
+  background-image: url('../../images/grey-flag-icon.svg');
+  opacity: 0.6;
+}
+
+.moviesCard__delete {
+  background-image: url('../../images/cross-icon.svg');
+  background-color: #F9F9F9;
+  background-size: 8px 8px;
+  transition: 0.2s ease-in;
+}
+
+.moviesCard__delete:hover, .moviesCard__delete:focus  {
+  background-size: 12px 12px;
+}
+
+.moviesCard__img {
+  width: 100%;
+}

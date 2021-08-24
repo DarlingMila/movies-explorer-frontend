@@ -1,0 +1,162 @@
+.aboutProject__content {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 110px 70px;
+}
+
+.aboutProject__headline {
+  margin: 0;
+  padding: 0;
+  padding-bottom: 23px;
+  border-bottom: 1px solid black;
+
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 27px;
+  letter-spacing: -0.04em;
+}
+
+.aboutProject__infoWrapper {
+  padding-top: 70px;
+  padding-bottom: 110px;
+
+  display: flex;
+  justify-content: space-between;
+}
+
+.aboutProject__infoColumn {
+  width: 49%;
+}
+
+.aboutProject__infoHeadline {
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+  letter-spacing: -0.04em;
+
+  margin: 0;
+  padding: 0;
+}
+
+.aboutProject__infoText {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+
+  margin: 0;
+  padding: 0;
+  padding-top: 26px;
+}
+
+.progressBar {
+  width: 100%;
+  display: flex;
+}
+
+.progressBar__backend {
+  width: 20%;
+}
+
+.progressBar__frontend {
+  width: 80%;
+}
+
+.progressBar__duration {
+  padding: 9px 14px;
+  text-align: center;
+
+  display: block;
+}
+
+.progressBar__duration_backend {
+  background-color: #2BE080;
+}
+
+.progressBar__duration_frontend {
+  background-color: #F2F2F2;
+}
+
+.progressBar__title {
+  padding: 14px 0;
+  text-align: center;
+  color: #A0A0A0;
+  display: block;
+}
+
+@media screen and (max-width: 768px) {
+  .aboutProject__content {
+    padding: 90px 50px;
+  }
+
+  .progressBar__backend {
+    width: 25%;
+  }
+  
+  .progressBar__frontend {
+    width: 75%;
+  }
+}
+
+@media screen and (max-width: 570px) {
+  .aboutProject__content {
+    padding: 70px 18px;
+  }
+
+  .aboutProject__headline {
+    font-size: 18px;
+    line-height: 22px;
+
+    padding-bottom: 28px;
+  }
+
+  .aboutProject__infoWrapper {
+    padding-top: 60px;
+    padding-bottom: 60px;
+  
+    display: flex;
+    flex-direction: column;
+  }
+
+  .aboutProject__infoColumn {
+    margin-top: 56px;
+    width: 100%;
+  }
+
+  .aboutProject__infoColumn:first-of-type {
+    margin-top: 0;
+  }
+  
+  .aboutProject__infoHeadline {
+    font-size: 18px;
+    line-height: 22px;
+  }
+
+  .aboutProject__infoText {
+    font-size: 11px;
+    line-height: 16px;
+  
+    margin: 0;
+    padding: 0;
+    padding-top: 16px;
+  }
+
+  .progressBar__backend {
+    width: 35%;
+  }
+  
+  .progressBar__frontend {
+    width: 65%;
+  }
+
+  .progressBar__duration {
+    font-size: 11px;
+    line-height: 13px;
+  }
+
+  .progressBar__title {
+    font-size: 11px;
+    line-height: 13px;
+
+    padding: 10px 0;
+  }
+}
