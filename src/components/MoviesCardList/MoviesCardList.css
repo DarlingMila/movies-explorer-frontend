@@ -19,6 +19,10 @@
   transition: 0.2s ease-in;
 }
 
+.moviesCardList__gallery_hide {
+  display: none;
+}
+
 .moviesCardList__moreButton {
   background-color: hsl(0, 0%, 98%);
   border-radius: 6px;
@@ -36,6 +40,10 @@
   cursor: pointer;
 
   transition: 0.2s ease-in;
+}
+
+.moviesCardList__moreButton_hidden {
+  display: none;
 }
 
 .moviesCardList__moreButton:hover, .moviesCardList__moreButton:focus {

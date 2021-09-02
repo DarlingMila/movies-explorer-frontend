@@ -3,12 +3,31 @@ import React from 'react';
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 
-export default function SavedMovies() {
+export default function SavedMovies({ allMovies, favoriteMovies, newQuery, showShortMovies, short, moviesPerPage, addMoreButton, showPreloader, addMovieToFavorite, deleteMovie }) {
+
+
   return (
+    
     <div>
 
-      <SearchForm />
-      <MoviesCardList />
+      <SearchForm 
+      search={newQuery}
+      showShortMovies={showShortMovies}
+      />
+
+      <MoviesCardList
+      allMovies={allMovies}
+      favoriteMovies={favoriteMovies}
+      short={short}
+
+      moviesPerPage={moviesPerPage}
+      addMoreButton={addMoreButton}
+      showPreloader={showPreloader}
+
+      addMovieToFavorite={addMovieToFavorite}
+      deleteMovie={deleteMovie}
+
+      />
 
     </div>
   )

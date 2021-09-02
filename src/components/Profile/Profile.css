@@ -94,9 +94,13 @@
   outline: none;
   border: none;
   background-color: transparent;
-  cursor: pointer;
+  cursor: not-allowed;
 
   transition: 0.2s ease-in;
+}
+
+.profile__button_active {
+  cursor: pointer;
 }
 
 .profile__button:first-of-type {
@@ -104,10 +108,12 @@
 }
 
 .profile__button_signout {
+  cursor: pointer;
   color:#FF3055;
 }
 
-.profile__button:hover, .profile__button:focus {
+.profile__button_active:hover, .profile__button_active:focus, 
+.profile__button_signout:hover, .profile__button_signout:focus {
   letter-spacing: 1px;
   font-weight: 500;
 }

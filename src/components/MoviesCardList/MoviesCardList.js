@@ -1,58 +1,94 @@
 import React from 'react';
+import { useLocation } from 'react-router-dom';
 
 import './MoviesCardList.css';
 
 import MoviesCard from '../MoviesCard/MoviesCard';
-
-import movieImg from '../../images/movie-img.jpg';
-
-const cards = [
-  {
-    img: movieImg,
-    name: '33 слова о дизайне',
-    duration: '1ч 47м',
-    saved: true,
-  },
-  {
-    img: movieImg,
-    name: '33 слова о дизайне',
-    duration: '1ч 47м',
-    saved: false,
-  },
-  {
-    img: movieImg,
-    name: '33 слова о дизайне',
-    duration: '1ч 47м',
-    saved: false,
-  },
-  {
-    img: movieImg,
-    name: '33 слова о дизайне',
-    duration: '1ч 47м',
-    saved: true,
-  },
-]
+import Preloader  from '../Preloader/Preloader';
 
 
+export default function MoviesCardList({ allMovies, favoriteMovies, short, moviesPerPage, addMoreButton, showPreloader, addMovieToFavorite, deleteMovie }) {
 
-export default function MoviesCardList() {
+  const path = useLocation().pathname;
+  
+  let movies = [];
+
+  function movieArray () {
+    movies = allMovies;
+    if (path === '/movies') {
+      movies = allMovies;
+    } else {
+      movies = favoriteMovies;
+    }
+    return movies;
+  }
+
+  function shortMoviesToggle(duration) {
+    if (short === false ) return true;
+    if (short === true && duration < 40) {
+      return true
+    };
+    return false;
+  } 
+
+  function galleryClassName () {
+    let className = 'moviesCardList__gallery';
+    if (showPreloader === true) {
+      className += ' moviesCardList__gallery_hide'
+    }
+    return className;
+  }
+
+  function buttonClassName() {
+    let className = 'moviesCardList__moreButton';
+    const shownMovies = movieArray()
+    .filter((movie) => shortMoviesToggle(movie.duration)).length
+
+    if (moviesPerPage >= shownMovies) {
+      className += ` moviesCardList__moreButton_hidden`;
+    }
+    return className;
+  }
+
+  function createMovieCard (movie) {  
+    return (<MoviesCard
+      key={movie.id}
+      id={movie.id}
+      movie={movie}
+
+      addMovieToFavorite={addMovieToFavorite}
+      deleteMovie={deleteMovie}
+
+      favoriteMovies={favoriteMovies}
+      
+    />)
+  }
+
+
   return (
     <section className="moviesCardList">
 
-      <ul className="moviesCardList__gallery">
-        {cards.map((item) => (
-          <MoviesCard
-            key={item._id}
-            id={item._id}
-            card={item}
-          />
+      <Preloader show={showPreloader}/>
 
-          )
-        ).reverse()}
+      <ul className={galleryClassName()}>
+        
+        {
+         movieArray()
+         .filter((movie) => shortMoviesToggle(movie.duration))
+         .slice(0, moviesPerPage)
+         .map((movie) => (createMovieCard(movie)))
+        }
+
       </ul>
 
-      <button type='button' className="moviesCardList__moreButton">Ещё</button>
+      <button 
+      type='button' 
+      className={buttonClassName()} 
+      onClick={addMoreButton}
+      >
+        Ещё
+      </button>
 
     </section>
-  )
+  );
 }

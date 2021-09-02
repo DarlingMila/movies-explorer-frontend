@@ -1,43 +1,97 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 import './Register.css';
 
-export default function Register() {
+export default function Register({ onRegister, registerValidation, nameValidation, emailValidation, passwordValidation, valid, nameError, emailError, passwordError }) {
+
+  const classNameBtn = `registerForm__submitButton ${valid && 'registerForm__submitButton_active'}`
+
+  function onChangeName(e) {
+    const text = e.target.value;
+    nameValidation(text);
+  }
+
+  function onChangeEmail(e) {
+    const text = e.target.value;
+    emailValidation(text);
+  }
+
+  function onChangePassword(e) {
+    const text = e.target.value;
+    passwordValidation(text);
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    onRegister();
+    document.getElementById('registerForm').reset();
+  }
+
   return (
     <section className="register">
 
       <Link to={`/`} className="register__logo"></Link>
       <h1 className="register__greetings">Добро пожаловать!</h1>
 
-      <form className="registerForm">
+      <form className="registerForm" id="registerForm" onChange={registerValidation}>
         <div className="registerForm__inputs">
 
           <label className="registerForm__inputArea">
             <span className="registerForm__inputTitle">Имя</span>
-            <input type="text" className="registerForm__input"></input>
-            <span className="registerForm__inputError registerForm__inputError_hide">Что-то пошло не так...</span>
+
+            <input 
+            onChange={onChangeName} 
+            type="text" 
+            className="registerForm__input"
+            >
+            </input>
+
+            <span className="registerForm__inputError">{nameError}</span>
           </label>
 
           <label className="registerForm__inputArea">
             <span className="registerForm__inputTitle">E-mail</span>
-            <input type="text" className="registerForm__input"></input>
-            <span className="registerForm__inputError registerForm__inputError_hide">Что-то пошло не так...</span>
+
+            <input 
+            onChange={onChangeEmail} 
+            type="text" 
+            className="registerForm__input"
+            >
+            </input>
+
+            <span className="registerForm__inputError">{emailError}</span>
           </label>
 
           <label className="registerForm__inputArea">
             <span className="registerForm__inputTitle">Пароль</span>
-            <input type="password" className="registerForm__input"></input>
-            <span className="registerForm__inputError">Что-то пошло не так...</span>
+
+            <input 
+            onChange={onChangePassword} 
+            type="password" 
+            className="registerForm__input"
+            >
+            </input>
+
+            <span className="registerForm__inputError">{passwordError}</span>
           </label>
 
         </div>
 
         <div className="registerForm__buttons">
-          <button type="submit" className="registerForm__submitButton">Зарегистрироваться</button>
+
+          <button 
+          type="submit" 
+          onClick={handleSubmit}
+          className={classNameBtn}
+          disabled={!valid}
+          >
+            Зарегистрироваться
+          </button>
+
           <div className="registerForm__signinWrapper"> 
             <span className="registerForm__signinText">Уже зарегистрированы?</span>
-            <button type="button" className="registerForm__signinButton">Войти</button>
+            <NavLink to={`/signin`} type="button" className="registerForm__signinButton">Войти</NavLink>
           </div>
         </div> 
 
