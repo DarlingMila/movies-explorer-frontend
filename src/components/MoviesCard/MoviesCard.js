@@ -7,19 +7,10 @@ import './MoviesCard.css';
 export default function MoviesCard({ movie, addMovieToFavorite, deleteMovie, favoriteMovies }) {
 
   const path = useLocation().pathname;
-  let isSaved = false;
+
+  let isSaved = favoriteMovies.some(i => i.movieId === movie.id);
 
   const movieImg = correctImgUrl();
-
-  function isSavedCheck() {
-    favoriteMovies.forEach((item) => {
-      
-      if (item.nameRU === movie.nameRU) {
-        isSaved = true;
-      }
-    })
-
-  }
 
   function correctImgUrl() {
     if (path === '/movies') {
@@ -50,14 +41,13 @@ export default function MoviesCard({ movie, addMovieToFavorite, deleteMovie, fav
   }
 
   function cardButtonClassName() {
-    isSavedCheck();
-
     let className = 'moviesCard__button';
 
     if (path === '/saved-movies') {
       className += ' moviesCard__delete';
     } else {
       className += ' moviesCard__save';
+
       if (isSaved === true) {
         className += ' moviesCard__save_true';
       }
@@ -90,7 +80,6 @@ export default function MoviesCard({ movie, addMovieToFavorite, deleteMovie, fav
       deleteMovieId = movie._id;
     } else {
       favoriteMovies.forEach((item) => {
-        console.log(item.movieId, movie.id, item._id)
   
         if (item.movieId === movie.id) {
   
@@ -101,10 +90,8 @@ export default function MoviesCard({ movie, addMovieToFavorite, deleteMovie, fav
     }
 
     if (isSaved === true) {
-      isSaved = false;
       deleteMovie(deleteMovieId);
     } else {
-      isSaved = true;
       addMovieToFavorite(movieInfo)
     } 
 
@@ -136,8 +123,6 @@ export default function MoviesCard({ movie, addMovieToFavorite, deleteMovie, fav
       <a href={trailerLink()} target="_blank" rel="noreferrer" className="moviesCard__imgBox">
         <img className="moviesCard__img" src={movieImg} alt={movie.nameRU} />
       </a>
-
-      
 
     </li>
   )

@@ -7,25 +7,14 @@ import MoviesCard from '../MoviesCard/MoviesCard';
 import Preloader  from '../Preloader/Preloader';
 
 
-export default function MoviesCardList({ allMovies, favoriteMovies, short, moviesPerPage, addMoreButton, showPreloader, addMovieToFavorite, deleteMovie }) {
+export default function MoviesCardList({ allMovies, favoriteMovies, short, moviesPerPage, addMoreButton, showPreloader, addMovieToFavorite, deleteMovie, movieArray }) {
 
   const path = useLocation().pathname;
   
-  let movies = [];
-
-  function movieArray () {
-    movies = allMovies;
-    if (path === '/movies') {
-      movies = allMovies;
-    } else {
-      movies = favoriteMovies;
-    }
-    return movies;
-  }
+  const movies = movieArray;
 
   function shortMoviesToggle(duration) {
-    if (short === false ) return true;
-    if (short === true && duration < 40) {
+    if ((short === true && duration < 40) || short === false) {
       return true
     };
     return false;
@@ -41,7 +30,7 @@ export default function MoviesCardList({ allMovies, favoriteMovies, short, movie
 
   function buttonClassName() {
     let className = 'moviesCardList__moreButton';
-    const shownMovies = movieArray()
+    const shownMovies = movies
     .filter((movie) => shortMoviesToggle(movie.duration)).length
 
     if (moviesPerPage >= shownMovies) {
@@ -50,10 +39,18 @@ export default function MoviesCardList({ allMovies, favoriteMovies, short, movie
     return className;
   }
 
-  function createMovieCard (movie) {  
+  function createMovieCard (movie) { 
+
+    let id = ''; 
+    if (path === '/movies') {
+      id = movie.id;
+    } else {
+      id = movie.movieId;
+    }
+
     return (<MoviesCard
-      key={movie.id}
-      id={movie.id}
+      key={id}
+      id={id}
       movie={movie}
 
       addMovieToFavorite={addMovieToFavorite}
@@ -73,7 +70,7 @@ export default function MoviesCardList({ allMovies, favoriteMovies, short, movie
       <ul className={galleryClassName()}>
         
         {
-         movieArray()
+         movies
          .filter((movie) => shortMoviesToggle(movie.duration))
          .slice(0, moviesPerPage)
          .map((movie) => (createMovieCard(movie)))

@@ -308,7 +308,10 @@ function App() {
     const jwt = localStorage.getItem('jwt');
 
     api.addMovie(movie, jwt)
-    .then()
+    .then((newMovie) => {
+      const newArray = selectedFavoriteMovies.concat(newMovie);
+      setSelectedFavoriteMovies(newArray)
+    })
     .catch(() => {
       showPopup('Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз.')
     })
@@ -318,7 +321,10 @@ function App() {
     const jwt = localStorage.getItem('jwt');
 
     api.deleteMovie(movieId, jwt)
-    .then()
+    .then(() => {
+      const newArray = selectedFavoriteMovies.filter((item) => item._id !== movieId);
+      setSelectedFavoriteMovies(newArray);
+    })
     .catch(() => {
       showPopup('Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз.')
     })
@@ -413,6 +419,8 @@ function App() {
           addMovieToFavorite={addMovieToFavorite}
           deleteMovie={deleteMovie}
 
+          movieArray={selectedMovies}
+
         />
 
         <ProtectedRoute 
@@ -433,6 +441,7 @@ function App() {
           addMovieToFavorite={addMovieToFavorite}
           deleteMovie={deleteMovie}
 
+          movieArray={selectedFavoriteMovies}
         />
 
         <Route path="*">

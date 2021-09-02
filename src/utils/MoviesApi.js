@@ -70,9 +70,14 @@ class MoviesApi {
   }
 }
 
+// const config = {
+//   beatfilmMoviesUrl: 'https://api.nomoreparties.co/beatfilm-movies',
+//   moviesExplorerUrl: 'http://localhost:3001',
+// }
+
 const config = {
   beatfilmMoviesUrl: 'https://api.nomoreparties.co/beatfilm-movies',
-  moviesExplorerUrl: 'http://localhost:3001',
+  moviesExplorerUrl: 'http://api.movies-world.nomoredomains.monster',
 }
 
 const api = new MoviesApi (config);

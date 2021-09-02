@@ -3,7 +3,7 @@ import React from 'react';
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 
-export default function SavedMovies({ allMovies, favoriteMovies, newQuery, showShortMovies, short, moviesPerPage, addMoreButton, showPreloader, addMovieToFavorite, deleteMovie }) {
+export default function SavedMovies({ allMovies, favoriteMovies, newQuery, showShortMovies, short, moviesPerPage, addMoreButton, showPreloader, addMovieToFavorite, deleteMovie, movieArray }) {
 
 
   return (
@@ -27,6 +27,7 @@ export default function SavedMovies({ allMovies, favoriteMovies, newQuery, showS
       addMovieToFavorite={addMovieToFavorite}
       deleteMovie={deleteMovie}
 
+      movieArray={movieArray}
       />
 
     </div>
