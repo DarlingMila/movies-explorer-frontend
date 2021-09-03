@@ -3,7 +3,7 @@ import { Link, NavLink } from 'react-router-dom';
 
 import './Register.css';
 
-export default function Register({ onRegister, registerValidation, nameValidation, emailValidation, passwordValidation, valid, nameError, emailError, passwordError }) {
+export default function Register({ onRegister, registerValidation, nameValidation, emailValidation, passwordValidation, valid, nameError, emailError, passwordError, isDisabled }) {
 
   const classNameBtn = `registerForm__submitButton ${valid && 'registerForm__submitButton_active'}`
 
@@ -25,7 +25,6 @@ export default function Register({ onRegister, registerValidation, nameValidatio
   function handleSubmit(e) {
     e.preventDefault();
     onRegister();
-    document.getElementById('registerForm').reset();
   }
 
   return (
@@ -44,6 +43,7 @@ export default function Register({ onRegister, registerValidation, nameValidatio
             onChange={onChangeName} 
             type="text" 
             className="registerForm__input"
+            disabled={isDisabled}
             >
             </input>
 
@@ -57,6 +57,7 @@ export default function Register({ onRegister, registerValidation, nameValidatio
             onChange={onChangeEmail} 
             type="text" 
             className="registerForm__input"
+            disabled={isDisabled}
             >
             </input>
 
@@ -70,6 +71,7 @@ export default function Register({ onRegister, registerValidation, nameValidatio
             onChange={onChangePassword} 
             type="password" 
             className="registerForm__input"
+            disabled={isDisabled}
             >
             </input>
 
@@ -84,7 +86,7 @@ export default function Register({ onRegister, registerValidation, nameValidatio
           type="submit" 
           onClick={handleSubmit}
           className={classNameBtn}
-          disabled={!valid}
+          disabled={!valid || isDisabled}
           >
             Зарегистрироваться
           </button>

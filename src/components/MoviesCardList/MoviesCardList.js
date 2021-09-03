@@ -60,22 +60,35 @@ export default function MoviesCardList({ allMovies, favoriteMovies, short, movie
     />)
   }
 
+  function pageContent() {
+    
+    if (movies.length === 0) {
+      return (
+        <h1 className="moviesCardList__title">Введите слово, чтобы начать поиск</h1>
+      )
+    } else {
+      return (
+        <ul className={galleryClassName()}>
+        
+        {
+        movies
+        .filter((movie) => shortMoviesToggle(movie.duration))
+        .slice(0, moviesPerPage)
+        .map((movie) => (createMovieCard(movie)))
+        }
+
+      </ul>
+      )
+    }
+  }
+
 
   return (
     <section className="moviesCardList">
 
       <Preloader show={showPreloader}/>
 
-      <ul className={galleryClassName()}>
-        
-        {
-         movies
-         .filter((movie) => shortMoviesToggle(movie.duration))
-         .slice(0, moviesPerPage)
-         .map((movie) => (createMovieCard(movie)))
-        }
-
-      </ul>
+      {pageContent()}
 
       <button 
       type='button' 

@@ -72,6 +72,11 @@
   background-color: hsl(0, 0%, 98%);
 }
 
+.profile__input:disabled {
+  background-color: transparent;
+  cursor: not-allowed;
+}
+
 .profile__buttons {
   margin: 0;
   padding: 0;

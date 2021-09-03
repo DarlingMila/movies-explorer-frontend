@@ -87,6 +87,11 @@
   border-bottom: 1px solid#3456F3;
 }
 
+.registerForm__input:disabled {
+  background-color: transparent;
+  cursor: not-allowed;
+}
+
 .registerForm__inputError {
   margin: 0;
   padding: 0;

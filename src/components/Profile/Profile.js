@@ -4,7 +4,7 @@ import './Profile.css';
 
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 
-export default function Profile({onLogout, onUpdate, profileValidation, nameValidation, emailValidation, valid}) {
+export default function Profile({ onLogout, onUpdate, profileValidation, nameValidation, emailValidation, valid, isDisabled}) {
 
   const currentUser = useContext(CurrentUserContext);
   const classNameBtn = `profile__button ${valid && 'profile__button_active'} profile__button_edit`;
@@ -22,7 +22,6 @@ export default function Profile({onLogout, onUpdate, profileValidation, nameVali
   function handleSubmit(e) {
     e.preventDefault();
     onUpdate();
-    document.getElementById('profile__form').reset();
   }
 
   function handleLogout(e) {
@@ -46,6 +45,7 @@ export default function Profile({onLogout, onUpdate, profileValidation, nameVali
             type="text" 
             className="profile__input" 
             placeholder={currentUser.name}
+            disabled={isDisabled}
             >
             </input>
 
@@ -59,6 +59,7 @@ export default function Profile({onLogout, onUpdate, profileValidation, nameVali
             type="text" 
             className="profile__input" 
             placeholder={currentUser.email}
+            disabled={isDisabled}
             >
             </input>
 
@@ -72,7 +73,7 @@ export default function Profile({onLogout, onUpdate, profileValidation, nameVali
           type="submit" 
           onClick={handleSubmit}
           className={classNameBtn}
-          disabled={!valid}
+          disabled={!valid || isDisabled}
           >
             Редактировать
           </button>

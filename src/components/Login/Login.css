@@ -87,6 +87,11 @@
   border-bottom: 1px solid#3456F3;
 }
 
+.loginForm__input:disabled {
+  background-color: transparent;
+  cursor: not-allowed;
+}
+
 .loginForm__submitButton {
   border-radius: 3px;
   outline: none;

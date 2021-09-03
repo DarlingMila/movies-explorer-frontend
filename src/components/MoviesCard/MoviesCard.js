@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom';
 
 import './MoviesCard.css';
 
+import { SHORT_MOVIE_LENGTH } from '../../config/config';
 
 export default function MoviesCard({ movie, addMovieToFavorite, deleteMovie, favoriteMovies }) {
 
@@ -32,13 +33,13 @@ export default function MoviesCard({ movie, addMovieToFavorite, deleteMovie, fav
     let hours = '';
     let minutes = '';
   
-    if (movie.duration < 40) {
+    if (movie.duration < SHORT_MOVIE_LENGTH) {
       minutes = movie.duration;
   
       time = `${minutes}м`
     } else {
-      hours = Math.floor(movie.duration / 40);
-      minutes = movie.duration - hours * 40;
+      hours = Math.floor(movie.duration / SHORT_MOVIE_LENGTH);
+      minutes = movie.duration - hours * SHORT_MOVIE_LENGTH;
   
       time = `${hours}ч ${minutes}м`
     }

@@ -21,6 +21,8 @@ import Popup from '../Popup/Popup';
 
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 
+import { NAME_REGEX, EMAIL_REGEX, MAX_SCREEN_WIDTH, MID_SCREEN_WIDTH, MAX_MOVIES_PER_PAGE, MID_MOVIES_PER_PAGE, MIN_MOVIES_PER_PAGE, MAX_ADDITION, MIN_ADDITION } from '../../config/config';
+
 function App() {
 
   const history = useHistory();
@@ -37,6 +39,7 @@ function App() {
   const [passwordError, setPasswordError] = useState('');
 
   const [valid, setValid] = useState(false);
+  const [isDisabled, setIsDisabled] = useState(false);
 
   function clearStates() {
     setName('');
@@ -51,9 +54,6 @@ function App() {
   useEffect(() => {
     clearStates();
   }, [pathName]);
-
-  const NAME_REGEX = /^[a-zA-Zа-яёА-ЯЁ -]+$/u;
-  const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
   function nameValidation(text) {
     if (!text) {
@@ -114,6 +114,8 @@ function App() {
   }, [name, email])
 
   const handleRegister = () => {
+    setIsDisabled(true)
+
     return auth.register(email, password, name)
     .then((res) => {
       return res;
@@ -124,26 +126,33 @@ function App() {
     .catch(() => {
       clearStates();
       showPopup('Ошибка регистрации. Попробуйте снова.');
+      setIsDisabled(false);
     })
   }
 
   const handleLogin = () => {
+    setIsDisabled(true)
+
     return auth.login(email, password)
     .then((res) => {
       localStorage.setItem('jwt', res.token);
       setLoggedIn(true);
+    })
+    .then(() => {
+      clearStates();
+      setIsDisabled(false);
       history.push('/movies');
     })
-    .catch((err) => {
+    .catch(() => {
       clearStates();
-      console.log(err)
       showPopup('Ошибка авторизации. Попробуйте снова.');
+      setIsDisabled(false);
     })
   }
 
   const handleLogout = () => {
     localStorage.removeItem('jwt');
-
+    localStorage.removeItem('allMovies');
     setLoggedIn(false);
     history.push('/');
   }
@@ -167,12 +176,21 @@ function App() {
       }
     };
 
+    setIsDisabled(true)
+
     return auth.changeUserInfo(newEmail(), newName(), jwt)
     .then((res) => {
-      setCurrentUser(res)
+      setCurrentUser(res);
+    })
+    .then(() => {
+      showPopup('Данные обновлены.', true);
+      document.getElementById('profile__form').reset();
+      clearStates();
+      setIsDisabled(false);
     })
     .catch(() => {
       showPopup('Ошибка при обновлении данных. Попробуйте снова.');
+      setIsDisabled(false)
     })
   }
 
@@ -184,18 +202,19 @@ function App() {
       .then((res) => {
         setLoggedIn(true);
         setCurrentUser(res);
-
         history.push('/movies');
       })
       .catch(() => {
         history.push('/signin')
       })
     }
-  }, [history, loggedIn])
+
+    console.log(currentUser)
+  }, [])
 
   useEffect(() => {
     tokenCheck();
-  }, [tokenCheck])
+  }, [tokenCheck, history, loggedIn])
 
 
   const [allMovies, setAllMovies] = useState([]);
@@ -233,48 +252,35 @@ function App() {
   }
   
   function quantityBasedOnWidth () {
-    if (screenWidth >= 1280) {
-      setMoviesPerPage(12);
-    } else if (screenWidth < 1280 && screenWidth >= 768) {
-      setMoviesPerPage(8);
+    if (screenWidth >= MAX_SCREEN_WIDTH) {
+      setMoviesPerPage(MAX_MOVIES_PER_PAGE);
+    } else if (screenWidth < MAX_SCREEN_WIDTH && screenWidth >=  MID_SCREEN_WIDTH) {
+      setMoviesPerPage(MID_MOVIES_PER_PAGE);
     } else {
-      setMoviesPerPage(5);
+      setMoviesPerPage(MIN_MOVIES_PER_PAGE);
     }
   }
 
   function addMoreButton() {
-    if (screenWidth >= 1280) {
-      setMoviesPerPage(moviesPerPage + 3);
+    if (screenWidth >= MAX_SCREEN_WIDTH) {
+      setMoviesPerPage(moviesPerPage + MAX_ADDITION);
     } else {
-      setMoviesPerPage(moviesPerPage + 2);
+      setMoviesPerPage(moviesPerPage + MIN_ADDITION);
     }
   }
 
   useEffect(() => {
     window.addEventListener('resize', windowWidth);
     windowWidth();
-  }, []);
 
-  useEffect(() => {
-    quantityBasedOnWidth ()
-  }, [screenWidth])
-
-  useEffect(() => {
     setShowPreloader(true);
 
     const jwt = localStorage.getItem('jwt'); 
 
-    if (jwt) {
+    if (jwt && currentUser) {
       api.getMyMovies(jwt)
       .then((res) => {
-        setAllFavoriteMovies(res);
-      })
-      .then(() => {
-        const requestedMovies = allFavoriteMovies
-        .filter((movie) => movie.nameRU.includes(query));
-
-        setSelectedFavoriteMovies(requestedMovies);
-        quantityBasedOnWidth();
+        setAllFavoriteMovies(res.filter(item => item.owner === currentUser._id));
       })
       .catch(() => {
         showPopup('Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз.')
@@ -284,23 +290,50 @@ function App() {
       })
     }
 
-    api.getAllMovies()
-    .then((res) => {
-      setAllMovies(res);
-    })
-    .then(() => {
-      const requestedMovies = allMovies
-      .filter((movie) => movie.nameRU.includes(query));
-  
-      setSelectedMovies(requestedMovies);
-      quantityBasedOnWidth();
-    })
-    .catch(() => {
-      showPopup('Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз.')
-    })
-    .finally(() => {
-      setShowPreloader(false);
-    });
+    const allMoviesFromStorage = JSON.parse(localStorage.getItem('allMovies')); 
+
+    if (allMoviesFromStorage) {
+      setAllMovies(allMoviesFromStorage)
+    } else {
+      api.getAllMovies()
+      .then((res) => {
+        setAllMovies(res);
+        localStorage.setItem('allMovies', JSON.stringify(res));
+      })
+      .catch(() => {
+        showPopup('Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз.')
+      })
+      .finally(() => {
+        setShowPreloader(false);
+      });
+    }
+
+    console.log('дело сделалось')
+  }, [currentUser]);
+
+  useEffect(() => {
+    quantityBasedOnWidth ()
+  }, [screenWidth])
+
+  useEffect(() => {
+    setShowPreloader(true);
+
+    const requestedFavoriteMovies = allFavoriteMovies
+    .filter((movie) => movie.nameRU.includes(query));
+    setSelectedFavoriteMovies(requestedFavoriteMovies);
+
+    const requestedMovies = allMovies
+    .filter((movie) => movie.nameRU.includes(query));
+    setSelectedMovies(requestedMovies);
+
+    quantityBasedOnWidth();
+    setShowPreloader(false);
+
+    if (query !== '') {
+      if ((requestedMovies.length === 0 && pathName === '/movies') || (requestedFavoriteMovies.length === 0 && pathName === '/saved-movies')) {
+        showPopup('Ничего не найдено.')
+      }
+    }
 
   }, [query]);
 
@@ -329,11 +362,12 @@ function App() {
     })
   }
 
-
   const [popup, setPopup] = useState(false);
+  const [isSuccessful, setIsSuccessful] = useState(false);
   const [popupMessage, setPopupMessage] =useState('');
 
-  function showPopup(message) {
+  function showPopup(message, type) {
+    if (type === true) {setIsSuccessful(true)} 
     setPopupMessage(message);
     setPopup(true);
   }
@@ -370,6 +404,7 @@ function App() {
           passwordError={passwordError}
 
           valid={valid}
+          isDisabled={isDisabled}
           />
         </Route>
 
@@ -382,6 +417,7 @@ function App() {
           passwordValidation={passwordValidation}
 
           valid={valid}
+          isDisabled={isDisabled}
           />
         </Route> 
  
@@ -398,6 +434,8 @@ function App() {
           emailValidation={emailValidation}
 
           valid={valid}
+          
+          isDisabled={isDisabled}
         />
 
         <ProtectedRoute 
@@ -455,6 +493,8 @@ function App() {
         popup={popup}
         hidePopup={hidePopup}
         popupMessage={popupMessage}
+
+        isSuccessful={isSuccessful}
       />
 
       </div>

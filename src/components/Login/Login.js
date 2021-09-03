@@ -3,7 +3,7 @@ import { Link, NavLink  } from 'react-router-dom';
 
 import './Login.css';
 
-export default function Login({ onLogin, loginValidation, emailValidation, passwordValidation, valid }) {
+export default function Login({ onLogin, loginValidation, emailValidation, passwordValidation, valid, isDisabled}) {
 
   const classNameBtn = `loginForm__submitButton ${valid && 'loginForm__submitButton_active'}`
   
@@ -20,7 +20,6 @@ export default function Login({ onLogin, loginValidation, emailValidation, passw
   function handleSubmit(e) {
     e.preventDefault();
     onLogin();
-    document.getElementById('loginForm').reset();
   }
   
   return (
@@ -39,6 +38,7 @@ export default function Login({ onLogin, loginValidation, emailValidation, passw
             onChange={onChangeEmail}  
             type="text" 
             className="loginForm__input"
+            disabled={isDisabled}
             >
             </input>
 
@@ -51,6 +51,7 @@ export default function Login({ onLogin, loginValidation, emailValidation, passw
             onChange={onChangePassword} 
             type="password" 
             className="loginForm__input"
+            disabled={isDisabled}
             >
             </input>
 
@@ -64,7 +65,7 @@ export default function Login({ onLogin, loginValidation, emailValidation, passw
           type="submit"
           onClick={handleSubmit}
           className={classNameBtn}
-          disabled={!valid}
+          disabled={!valid || isDisabled}
           >
             Войти
           </button>
