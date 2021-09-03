@@ -57,7 +57,6 @@ export default function MoviesCardList({ allMovies, favoriteMovies, short, movie
       deleteMovie={deleteMovie}
 
       favoriteMovies={favoriteMovies}
-      
     />)
   }
 

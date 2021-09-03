@@ -304,16 +304,16 @@ function App() {
 
   }, [query]);
 
+
   const addMovieToFavorite = (movie) => {
     const jwt = localStorage.getItem('jwt');
 
     api.addMovie(movie, jwt)
-    .then((newMovie) => {
-      const newArray = selectedFavoriteMovies.concat(newMovie);
-      setSelectedFavoriteMovies(newArray)
+    .then((res) => {
+      setSelectedFavoriteMovies(selectedFavoriteMovies.concat(res.movie))
     })
     .catch(() => {
-      showPopup('Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз.')
+      showPopup('Не удалось сохранить фильм. Подождите немного и попробуйте ещё раз.')
     })
   }
 
@@ -322,11 +322,10 @@ function App() {
 
     api.deleteMovie(movieId, jwt)
     .then(() => {
-      const newArray = selectedFavoriteMovies.filter((item) => item._id !== movieId);
-      setSelectedFavoriteMovies(newArray);
+      setSelectedFavoriteMovies(selectedFavoriteMovies.filter((item) => item._id !== movieId));
     })
     .catch(() => {
-      showPopup('Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз.')
+      showPopup('Не удалось удалить фильм. Подождите немного и попробуйте ещё раз.')
     })
   }
 

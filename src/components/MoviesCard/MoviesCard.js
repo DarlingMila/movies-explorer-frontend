@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import './MoviesCard.css';
@@ -8,7 +8,13 @@ export default function MoviesCard({ movie, addMovieToFavorite, deleteMovie, fav
 
   const path = useLocation().pathname;
 
-  let isSaved = favoriteMovies.some(i => i.movieId === movie.id);
+  const [isLikeActive, setIsLikeActive] = useState(true);
+
+  useEffect(() => {
+    if (path === '/movies') {
+      setIsLikeActive(favoriteMovies.some(i => i.movieId === movie.id))
+    }
+  }, [favoriteMovies])
 
   const movieImg = correctImgUrl();
 
@@ -40,7 +46,7 @@ export default function MoviesCard({ movie, addMovieToFavorite, deleteMovie, fav
     return time;
   }
 
-  function cardButtonClassName() {
+  const cardButtonClassName = () => {
     let className = 'moviesCard__button';
 
     if (path === '/saved-movies') {
@@ -48,7 +54,7 @@ export default function MoviesCard({ movie, addMovieToFavorite, deleteMovie, fav
     } else {
       className += ' moviesCard__save';
 
-      if (isSaved === true) {
+      if (isLikeActive === true) {
         className += ' moviesCard__save_true';
       }
     }
@@ -56,13 +62,12 @@ export default function MoviesCard({ movie, addMovieToFavorite, deleteMovie, fav
     return className;
   }
 
-
   function movieButtonToggle(e) {
     e.preventDefault();
     
     const movieInfo = {
-      country: movie.country,
-      director: movie.director,
+      country: `${movie.country === null ? 'нет данных' : movie.country}`,
+      director: `${movie.director === null ? 'нет данных' : movie.director}`,
       duration: movie.duration,
       year: movie.year,
       description: movie.description,
@@ -71,7 +76,7 @@ export default function MoviesCard({ movie, addMovieToFavorite, deleteMovie, fav
       thumbnail: movieImg,
       movieId: movie.id,
       nameRU: movie.nameRU,
-      nameEN: movie.nameEN,
+      nameEN: `${movie.nameEN === null ? 'нет данных' : movie.nameEN}`,
     }
 
     let deleteMovieId = '';
@@ -89,7 +94,7 @@ export default function MoviesCard({ movie, addMovieToFavorite, deleteMovie, fav
       })
     }
 
-    if (isSaved === true) {
+    if (isLikeActive === true) {
       deleteMovie(deleteMovieId);
     } else {
       addMovieToFavorite(movieInfo)
