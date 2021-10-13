@@ -99,7 +99,7 @@
   background-image: url('../../images/my-photo.jpg');
   background-position: center;
   background-repeat: no-repeat;
-  background-size: 270px 327px;
+  background-size: cover;
 
   width: 270px;
   height: 327px;

@@ -1,46 +1,90 @@
-// import userEvent from '@testing-library/user-event';
-import React from 'react';
+import React, { useContext } from 'react';
 
 import './Profile.css';
 
+import CurrentUserContext from '../../contexts/CurrentUserContext';
 
-function checkForm (e) {
-  e.preventDefault();
-  const form = document.querySelector('.profile__form');
+export default function Profile({ onLogout, onUpdate, profileValidation, nameValidation, emailValidation, valid, isDisabled}) {
 
-  console.log(form.elements[0].value);
-  console.log(form.elements[1].value);
-}
+  const currentUser = useContext(CurrentUserContext);
+  const classNameBtn = `profile__button ${valid && 'profile__button_active'} profile__button_edit`;
 
-const user = {
-  name: 'Виталька',
-  email: 'почта@почта.крю'
-}
+  function onChangeName(e) {
+    const text = e.target.value;
+    nameValidation(text);
+  }
 
-export default function Profile() {
+  function onChangeEmail(e) {
+    const text = e.target.value;
+    emailValidation(text);
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    onUpdate();
+  }
+
+  function handleLogout(e) {
+    e.preventDefault();
+    onLogout();
+  }
+
   return (
     <section className="profile">
 
-      <h1 className="profile__greetings">Привет, {user.name}!</h1>
+      <h1 className="profile__greetings">Привет, {currentUser.name}!</h1>
 
-      <form className="profile__form">
+      <form className="profile__form" id="profile__form" onChange={profileValidation}>
 
         <div className="profile__inputs">
           <label className="profile__inputArea">
             <span className="profile__inputTitle">Имя</span>
-            <input type="text" className="profile__input" placeholder={user.name}></input>
+
+            <input 
+            onChange={onChangeName} 
+            type="text" 
+            className="profile__input" 
+            placeholder={currentUser.name}
+            disabled={isDisabled}
+            >
+            </input>
+
           </label>
 
           <label className="profile__inputArea">
             <span className="profile__inputTitle">E-mail</span>
-            <input type="text" className="profile__input" placeholder={user.email}></input>
+
+            <input 
+            onChange={onChangeEmail} 
+            type="text" 
+            className="profile__input" 
+            placeholder={currentUser.email}
+            disabled={isDisabled}
+            >
+            </input>
+
           </label>
 
         </div>
 
         <div className="profile__buttons">
-          <button type="submit" className="profile__button profile__button_edit" onClick={checkForm}>Редактировать</button>
-          <button type="button" className="profile__button profile__button_signout">Выйти из аккаунта</button>
+
+          <button 
+          type="submit" 
+          onClick={handleSubmit}
+          className={classNameBtn}
+          disabled={!valid || isDisabled}
+          >
+            Редактировать
+          </button>
+
+          <button 
+          type="button" 
+          onClick={handleLogout}
+          className="profile__button profile__button_signout"
+          >
+            Выйти из аккаунта
+          </button>
         </div>
 
       </form>

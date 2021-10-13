@@ -62,11 +62,15 @@
   font-weight: 500;
   font-size: 12px;
   line-height: 16px;
-  color: white;
+  color: black;
   
   background-color: transparent;
 
   transition: 0.2s ease-in;
+}
+
+.header__registerButton_main {
+  color: white;
 }
 
 .header__loginButton {
@@ -101,7 +105,13 @@
   border: none;
   outline: none;
 
+  color: black;
+
   transition: 0.2s ease;
+}
+
+.header__navLink_main {
+  color: white;
 }
 
 .header__navLink:first-of-type{
@@ -114,6 +124,10 @@
 
 .header__navLink:visited {
   color: black;
+}
+
+.header__navLink_main:visited {
+  color: white;
 }
 
 .header__navLink:hover, .header__navLink:focus {
@@ -199,7 +213,7 @@ body._lock {
 }
 
 .header__menuListItem:last-of-type {
-  margin-top: 100%;
+  margin-top: 50vh;
 }
 
 .header__profileImg_menu {
@@ -234,6 +248,10 @@ body._lock {
   background-color: black;
 }
 
+.header__menuIcon_main span, .header__menuIcon_main::before, .header__menuIcon_main::after {
+  background-color: white;
+}
+
 .header__menuIcon::before {
   top: 0;
 }
@@ -249,16 +267,19 @@ body._lock {
 
 .header__menuIcon_active span {
   transform: scale(0) translate(0px, -50%);
+  background-color: black;
 }
 
 .header__menuIcon_active::before {
   top: 50%;
   transform: rotate(-45deg) translate(0, -50%);
+  background-color: black;
 }
 
 .header__menuIcon_active::after {
   bottom: 50%;
   transform: rotate(45deg) translate(0, 50%);
+  background-color: black;
 }
 
 .header__menuLink {

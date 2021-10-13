@@ -87,6 +87,11 @@
   border-bottom: 1px solid#3456F3;
 }
 
+.registerForm__input:disabled {
+  background-color: transparent;
+  cursor: not-allowed;
+}
+
 .registerForm__inputError {
   margin: 0;
   padding: 0;
@@ -103,21 +108,29 @@
 }
 
 .registerForm__submitButton {
-  background-color:hsl(229, 89%, 58%);
   border-radius: 3px;
   outline: none;
   border: none;
 
-  color: white;
-
   width: 100%;
   margin: 0;
   padding: 14px 0;
+
+  color: black;
+  background-color:hsl(0, 0%, 97%);
+  cursor: not-allowed;
   
   transition: 0.2s ease-in;
 }
 
-.registerForm__submitButton:hover, .registerForm__submitButton:focus {
+.registerForm__submitButton_active {
+  color: white;
+  background-color:hsl(229, 89%, 58%);
+  cursor: pointer;
+}
+
+.registerForm__submitButton_active:hover, 
+.registerForm__submitButton_active:focus {
   background-color:hsl(229, 89%, 50%);
   letter-spacing: 1px;
 }
@@ -144,6 +157,7 @@
   font-weight: 400;
   font-size: 14px;
   line-height: 17px;
+  text-decoration: none;
   color: hsl(229, 89%, 58%);
   background-color: transparent;
   outline: none;

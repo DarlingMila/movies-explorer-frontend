@@ -12,22 +12,22 @@ export default function Portfolio() {
 
         <ul className="portfolio__links">
 
-          <li className="portfolio__item">
-            <a className="portfolio__link" target="_blank" rel="noreferrer" href="https://github.com/DarlingMila/how-to-learn">
+          <li className="portfolio__item" tabIndex="0">
+            <a className="portfolio__link" target="_blank" rel="noreferrer" href="https://github.com/DarlingMila/how-to-learn" tabIndex="-1">
               <p className="portfolio__linkName">Статичный сайт</p>
               <span className="portfolio__arrow">&#8599;</span>
             </a>
           </li>
 
-          <li className="portfolio__item">
-            <a className="portfolio__link" target="_blank" rel="noreferrer" href="https://github.com/DarlingMila/russian-travel">
+          <li className="portfolio__item" tabIndex="0">
+            <a className="portfolio__link" target="_blank" rel="noreferrer" href="https://github.com/DarlingMila/russian-travel" tabIndex="-1">
               <p className="portfolio__linkName">Адаптивный сайт</p>
               <span className="portfolio__arrow">&#8599;</span>
             </a>
           </li>
 
-          <li className="portfolio__item">
-            <a className="portfolio__link" target="_blank" rel="noreferrer" href="https://github.com/DarlingMila/react-mesto-api-full">
+          <li className="portfolio__item" tabIndex="0">
+            <a className="portfolio__link" target="_blank" rel="noreferrer" href="https://github.com/DarlingMila/react-mesto-api-full" tabIndex="-1">
               <p className="portfolio__linkName">Одностраничное приложение</p>
               <span className="portfolio__arrow">&#8599;</span>
             </a>

@@ -19,6 +19,10 @@
   transition: 0.2s ease-in;
 }
 
+.moviesCardList__gallery_hide {
+  display: none;
+}
+
 .moviesCardList__moreButton {
   background-color: hsl(0, 0%, 98%);
   border-radius: 6px;
@@ -38,10 +42,22 @@
   transition: 0.2s ease-in;
 }
 
+.moviesCardList__moreButton_hidden {
+  display: none;
+}
+
 .moviesCardList__moreButton:hover, .moviesCardList__moreButton:focus {
   letter-spacing: 1px;
   font-weight: 500;
   background-color: hsl(0, 0%, 96%);
+}
+
+.moviesCardList__title {
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 25px;
+  text-align: center;
+  color:hsl(0, 0%, 63%);
 }
 
 @media screen and (max-width: 990px) {

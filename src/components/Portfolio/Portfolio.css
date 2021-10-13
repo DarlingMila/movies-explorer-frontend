@@ -70,13 +70,23 @@
 
 }
 
-.portfolio__item:hover > .portfolio__link {
-  color: #3456F3;
+.portfolio__item:hover, .portfolio__item:focus {
+  outline: none;
 }
 
-.portfolio__item:hover > .portfolio__link > .portfolio__arrow {
+.portfolio__item:hover > .portfolio__link, 
+.portfolio__item:focus > .portfolio__link {
+  color: #3456F3;
+  outline: none;
+  border: none;
+}
+
+.portfolio__item:hover > .portfolio__link > .portfolio__arrow, 
+.portfolio__item:focus > .portfolio__link > .portfolio__arrow {
   color: #3456F3;
   font-size: 40px;
+  outline: none;
+  border: none;
 }
 
 @media screen and (max-width: 768px) {

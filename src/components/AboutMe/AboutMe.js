@@ -16,7 +16,7 @@ export default function AboutMe() {
             <span className="aboutMe__name">Людмила</span>
             <span className="aboutMe__info">Фронтенд-разработчик, 25 лет</span>
 
-            <p className="aboutMe__about">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            <p className="aboutMe__about">Раньше занималась обновлением информации на сайте, теперь хочу попробовать себя непосредственно в веб-разработке. Обучение начала с просмотров уроков на ютубе и чтения документаций, а затем решила пройти курс в Яндекс.Практикум. Веб-разработка привлекается меня своей схожестью с конструктором и поиском интересных решений. Мне нравится наблюдать как строки кода превращаются в меню сайта или интерактивную кнопку.</p>
 
             <ul className="aboutMe__links">
               <li className="aboutMe__item">
