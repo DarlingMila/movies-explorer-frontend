@@ -5,9 +5,6 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList';
 
 export default function Movies({ allMovies, favoriteMovies, newQuery, showShortMovies, short, moviesPerPage, addMoreButton, showPreloader, addMovieToFavorite, deleteMovie, movieArray }) {
 
-  
-
-
   return (
     <div>
 

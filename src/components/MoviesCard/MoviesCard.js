@@ -9,11 +9,13 @@ export default function MoviesCard({ movie, addMovieToFavorite, deleteMovie, fav
 
   const path = useLocation().pathname;
 
-  const [isLikeActive, setIsLikeActive] = useState(true);
+  const [isLikeActive, setIsLikeActive] = useState();
 
   useEffect(() => {
     if (path === '/movies') {
-      setIsLikeActive(favoriteMovies.some(i => i.movieId === movie.id))
+      setIsLikeActive(favoriteMovies.some(i => i.movieId === movie.id));
+    } else {
+      setIsLikeActive(true);
     }
   }, [favoriteMovies])
 

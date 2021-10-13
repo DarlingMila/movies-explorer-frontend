@@ -209,7 +209,6 @@ function App() {
       })
     }
 
-    console.log(currentUser)
   }, [])
 
   useEffect(() => {
@@ -235,7 +234,7 @@ function App() {
     if (query === '') {
       showPopup('Введите ключевое слово.');
     } else {
-      setQuery(query);
+      setQuery(query.toLowerCase());
     }
   }
 
@@ -308,7 +307,6 @@ function App() {
       });
     }
 
-    console.log('дело сделалось')
   }, [currentUser]);
 
   useEffect(() => {
@@ -319,11 +317,11 @@ function App() {
     setShowPreloader(true);
 
     const requestedFavoriteMovies = allFavoriteMovies
-    .filter((movie) => movie.nameRU.includes(query));
+    .filter((movie) => movie.nameRU.toLowerCase().includes(query));
     setSelectedFavoriteMovies(requestedFavoriteMovies);
 
     const requestedMovies = allMovies
-    .filter((movie) => movie.nameRU.includes(query));
+    .filter((movie) => movie.nameRU.toLowerCase().includes(query));
     setSelectedMovies(requestedMovies);
 
     quantityBasedOnWidth();
@@ -343,7 +341,9 @@ function App() {
 
     api.addMovie(movie, jwt)
     .then((res) => {
-      setSelectedFavoriteMovies(selectedFavoriteMovies.concat(res.movie))
+      const newMovieArray = allFavoriteMovies.concat(res.movie);
+      setAllFavoriteMovies(newMovieArray);
+      setSelectedFavoriteMovies(newMovieArray.filter((movie) => movie.nameRU.toLowerCase().includes(query)));
     })
     .catch(() => {
       showPopup('Не удалось сохранить фильм. Подождите немного и попробуйте ещё раз.')
@@ -355,7 +355,9 @@ function App() {
 
     api.deleteMovie(movieId, jwt)
     .then(() => {
-      setSelectedFavoriteMovies(selectedFavoriteMovies.filter((item) => item._id !== movieId));
+      const newMovieArray = selectedFavoriteMovies.filter((item) => item._id !== movieId);
+      setAllFavoriteMovies(newMovieArray);
+      setSelectedFavoriteMovies(newMovieArray);
     })
     .catch(() => {
       showPopup('Не удалось удалить фильм. Подождите немного и попробуйте ещё раз.')
